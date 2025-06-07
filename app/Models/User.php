@@ -9,6 +9,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+
+    // protected $table = 'tb_users';
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -17,10 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
+        'code', 'created_at', 'email', 'enabled', 'modified_at',
+        'password', 'phone_number', 'username', 'remember_token'
     ];
 
     /**
@@ -39,35 +40,21 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
-    /**
-     * Vérifier si l'utilisateur est un RH
-     *
-     * @return bool
-     */
-    public function isRH()
+    protected static function booted()
     {
-        return $this->role === 'rh';
+        static::creating(function ($user) {
+            $user->code = self::generateUserCode();
+        });
     }
 
-    /**
-     * Vérifier si l'utilisateur est un employé
-     *
-     * @return bool
-     */
-    public function isEmployee()
+    protected static function generateUserCode()
     {
-        return $this->role === 'employe';
+        $prefix = 'USR';
+        $randomNumber = str_pad(mt_rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        return $prefix . $randomNumber;
     }
 
-    /**
-     * Relation avec l'employé
-     */
-    public function employee()
-    {
-        return $this->hasOne(Employee::class);
-    }
 }

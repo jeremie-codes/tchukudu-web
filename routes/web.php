@@ -1,43 +1,50 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\MerchantController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\ConfigurationController;
+use App\Http\Controllers\Admin\TokenController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EmployeController;
-use App\Http\Controllers\CongeController;
-use App\Http\Controllers\PresenceController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LogistiqueController;
+Route::get('/login', function() {
+    return view('auths.login');
+})->name('admin.home');
 
-Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [DashboardController::class, 'login'])->name('login');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    // Dashboard
 
-    // Employés
-    Route::resource('employes', EmployeController::class);
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Congés
-    Route::resource('conges', CongeController::class);
-    Route::get('conge/planning', [CongeController::class, 'planning'])->name('conges.planning');
-    Route::get('conge/attribuer', [CongeController::class, 'attribuer'])->name('conges.attribution');;
-    Route::post('conges/{conge}/approve', [CongeController::class, 'approve'])->name('conges.approve');
-    Route::post('conges/{conge}/reject', [CongeController::class, 'reject'])->name('conges.reject');
-
-    // Présences
-    Route::resource('presences', PresenceController::class);
-
-    // Utilisateurs et Rôles
-    Route::get('users/roles', [UserController::class, 'roles'])->name('users.roles');
-    Route::post('users/roles', [UserController::class, 'storeRole'])->name('users.roles.store');
-    Route::put('users/roles/{role}', [UserController::class, 'updateRole'])->name('users.roles.update');
+    // Users
     Route::resource('users', UserController::class);
 
-    // Logistique
-    Route::resource('logistique', LogistiqueController::class);
-    Route::post('logistique/demande', [LogistiqueController::class, 'storeDemande'])->name('logistique.demande.store');
-    Route::put('logistique/produit/{produit}', [LogistiqueController::class, 'updateProduit'])->name('logistique.produit.update');
+    // Merchants
+    Route::resource('merchants', MerchantController::class);
+    Route::patch('merchants/{merchant}/status', [MerchantController::class, 'toggleStatus'])->name('merchants.status');
+
+    // Messages
+    Route::resource('messages', MessageController::class)->only(['index', 'show']);
+    Route::post('messages/{message}/retry', [MessageController::class, 'retry'])->name('messages.retry');
+
+    // Configurations
+    Route::get('configurations', [ConfigurationController::class, 'index'])->name('configurations.index');
+    Route::post('configurations', [ConfigurationController::class, 'update'])->name('configurations.update');
+
+    // API Tokens
+    Route::resource('tokens', TokenController::class)->except(['edit', 'update']);
+    Route::post('tokens/{token}/regenerate', [TokenController::class, 'regenerate'])->name('tokens.regenerate');
+    Route::post('tokens/{token}/toggle', [TokenController::class, 'toggle'])->name('tokens.toggle');
+
+    // Authentication
+    Route::post('/logout', function() {
+        auth()->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect()->route('admin.home');
+    })->name('logout');
+
 });
