@@ -1,50 +1,30 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\MerchantController;
-use App\Http\Controllers\Admin\MessageController;
-use App\Http\Controllers\Admin\ConfigurationController;
-use App\Http\Controllers\Admin\TokenController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TransporterController;
+use App\Http\Controllers\ShipperController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', function() {
-    return view('auths.login');
-})->name('admin.home');
+// Pages principales
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/comment-ca-marche', [HomeController::class, 'howItWorks'])->name('how-it-works');
+Route::get('/transporteurs', [TransporterController::class, 'index'])->name('transporters');
+Route::get('/expediteurs', [ShipperController::class, 'index'])->name('shippers');
+Route::get('/captures-ecran', [HomeController::class, 'screenshots'])->name('screenshots');
 
-Route::post('/login', [DashboardController::class, 'login'])->name('login');
+// Contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::middleware(['auth'])->group(function () {
-    // Dashboard
+// Pages légales
+Route::get('/mentions-legales', [HomeController::class, 'legalNotice'])->name('legal-notice');
+Route::get('/politique-confidentialite', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-
-    // Users
-    Route::resource('users', UserController::class);
-
-    // Merchants
-    Route::resource('merchants', MerchantController::class);
-    Route::patch('merchants/{merchant}/status', [MerchantController::class, 'toggleStatus'])->name('merchants.status');
-
-    // Messages
-    Route::resource('messages', MessageController::class)->only(['index', 'show']);
-    Route::post('messages/{message}/retry', [MessageController::class, 'retry'])->name('messages.retry');
-
-    // Configurations
-    Route::get('configurations', [ConfigurationController::class, 'index'])->name('configurations.index');
-    Route::post('configurations', [ConfigurationController::class, 'update'])->name('configurations.update');
-
-    // API Tokens
-    Route::resource('tokens', TokenController::class)->except(['edit', 'update']);
-    Route::post('tokens/{token}/regenerate', [TokenController::class, 'regenerate'])->name('tokens.regenerate');
-    Route::post('tokens/{token}/toggle', [TokenController::class, 'toggle'])->name('tokens.toggle');
-
-    // Authentication
-    Route::post('/logout', function() {
-        auth()->logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        return redirect()->route('admin.home');
-    })->name('logout');
-
+// Administration basique
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/contacts', [AdminController::class, 'contacts'])->name('contacts');
+    Route::delete('/contacts/{contact}', [AdminController::class, 'destroyContact'])->name('contacts.destroy');
 });
