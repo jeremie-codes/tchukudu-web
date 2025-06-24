@@ -13,10 +13,10 @@
         <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
         <!-- style sheets and font icons  -->
-        <link rel="stylesheet" type="text/css" href="css/font-icons.min.css">
-        <link rel="stylesheet" type="text/css" href="css/theme-vendors.min.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-icons.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme-vendors.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}" />
     </head>
     <body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="modern" data-mobile-nav-bg-color="#302158">
         <!-- start header -->
@@ -500,7 +500,7 @@
                     </div>
                 </div>
             </div>
-        </section>    
+        </section>
         <!-- end hero section -->
         <!-- start section -->
         <section class="border-bottom border-color-medium-gray md-no-padding-top wow animate__fadeIn">
@@ -597,7 +597,7 @@
                                     </span>
                                 </a>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="col-xl-5 offset-xl-3 col-lg-6 offset-lg-1 wow animate__fadeInRight">
                         <div class="outside-box-right">
@@ -736,7 +736,7 @@
                                         <img src="https://via.placeholder.com/353x681" alt=""/>
                                     </div>
                                     <!-- end slider item -->
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -865,7 +865,7 @@
                                             <p class="margin-30px-bottom">Lorem ipsum dolor sit consectetur adipiscing do eiusmod tempor incididunt ut labore et dolore magna ut enim ad minim veniam nostrud exercitation ullamco laboris nisi.</p>
                                         </div>
                                         <div class="testimonials-author text-medium margin-5px-bottom text-gradient-light-purple-light-red text-uppercase font-weight-600 d-inline-block">Alexander Harvard</div>
-                                        <div class="testimonials-position text-medium">ThemeZaa Design</div> 
+                                        <div class="testimonials-position text-medium">ThemeZaa Design</div>
                                     </div>
                                 </div>
                                 <!-- end slider item -->
@@ -878,7 +878,7 @@
                                             <p class="margin-30px-bottom">Lorem ipsum dolor sit consectetur adipiscing do eiusmod tempor incididunt ut labore et dolore magna ut enim ad minim veniam nostrud exercitation ullamco laboris nisi.</p>
                                         </div>
                                         <div class="testimonials-author text-medium margin-5px-bottom text-gradient-light-purple-light-red text-uppercase font-weight-600 d-inline-block">Shoko Mugikura</div>
-                                        <div class="testimonials-position text-medium">Google Design</div> 
+                                        <div class="testimonials-position text-medium">Google Design</div>
                                     </div>
                                 </div>
                                 <!-- end slider item -->
@@ -891,7 +891,7 @@
                                             <p class="margin-30px-bottom">Lorem ipsum dolor sit consectetur adipiscing do eiusmod tempor incididunt ut labore et dolore magna ut enim ad minim veniam nostrud exercitation ullamco laboris nisi.</p>
                                         </div>
                                         <div class="testimonials-author text-medium margin-5px-bottom text-gradient-light-purple-light-red text-uppercase font-weight-600 d-inline-block">Herman Miller</div>
-                                        <div class="testimonials-position text-medium">Apple Design</div> 
+                                        <div class="testimonials-position text-medium">Apple Design</div>
                                     </div>
                                 </div>
                                 <!-- end slider item -->
@@ -904,7 +904,7 @@
                                             <p class="margin-30px-bottom">Lorem ipsum dolor sit consectetur adipiscing do eiusmod tempor incididunt ut labore et dolore magna ut enim ad minim veniam nostrud exercitation ullamco laboris nisi.</p>
                                         </div>
                                         <div class="testimonials-author text-medium margin-5px-bottom text-gradient-light-purple-light-red text-uppercase font-weight-600 d-inline-block">Shoko Mugikura</div>
-                                        <div class="testimonials-position text-medium">Google Design</div> 
+                                        <div class="testimonials-position text-medium">Google Design</div>
                                     </div>
                                 </div>
                                 <!-- end slider item -->
@@ -974,7 +974,7 @@
                         <!-- start footer column -->
                         <div class="col-lg-2 col-md-4 col-sm-6 xs-margin-45px-bottom">
                             <span class="alt-font font-weight-500 d-block text-white margin-20px-bottom xs-margin-10px-bottom">Customer</span>
-                            <ul>                           
+                            <ul>
                                 <li><a href="faq.html">Client support</a></li>
                                 <li><a href="latest-news.html">Latest news</a></li>
                                 <li><a href="our-story.html">Company story</a></li>
@@ -984,7 +984,7 @@
                         </div>
                         <!-- end footer column -->
                         <!-- start footer column -->
-                        <div class="col-lg-3 offset-lg-1 col-md-8 col-sm-6 last-paragraph-no-margin text-center text-lg-start">         
+                        <div class="col-lg-3 offset-lg-1 col-md-8 col-sm-6 last-paragraph-no-margin text-center text-lg-start">
                             <span class="alt-font font-weight-500 d-none d-lg-block text-white margin-30px-bottom xs-margin-10px-bottom">Download for free</span>
                             <div class="w-85 md-w-100 d-md-flex flex-md-row d-lg-inline-block">
                                 <a href="#" class="margin-20px-bottom d-inline-block md-margin-10px-right sm-no-margin-right">
@@ -1000,7 +1000,7 @@
                 </div>
             </div>
             <div class="footer-bottom padding-35px-tb border-top border-width-1px border-color-white-transparent">
-                <div class="container"> 
+                <div class="container">
                     <div class="row row-cols-1 row-cols-md-2 align-items-center">
                         <div class="col sm-margin-15px-bottom">
                             <ul class="footer-horizontal-link d-flex flex-column flex-sm-row justify-content-center justify-content-md-start text-center">
@@ -1022,8 +1022,8 @@
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="feather icon-feather-arrow-up"></i></a>
         <!-- end scroll to top -->
         <!-- javascript -->
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/theme-vendors.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/theme-vendors.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     </body>
 </html>
