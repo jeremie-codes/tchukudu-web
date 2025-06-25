@@ -12,79 +12,149 @@ use App\Models\Configuration;
 use App\Models\Merchant;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Owner;
+use App\Models\Transporter;
+use App\Models\Contact;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $merchant = Merchant::create([
-            'active' => 1,
-            'code' => 'WQAXBPWKAQQU',
-            'created_at' => '2025-06-05 09:27:09.651459',
-            'name' => 'REGIDESO',
-            'own_config' => 1,
-            'sms_from' => 'REGIDESO',
-            'sms_login' => 'NCV4Y7JS',
-        ]);
+        
+        
+        // Créer des propriétaires de véhicules
+        $owners = [
+            [
+                'nom' => 'MUKENDI',
+                'prenom' => 'Jean-Baptiste',
+                'email' => 'jb.mukendi@example.com',
+                'numero_telephone' => '+243123456789',
+                'adresse' => 'Avenue Kasa-Vubu, Kinshasa',
+                'type_vehicule' => 'camion',
+                'marque_vehicule' => 'Mercedes',
+                'modele_vehicule' => 'Actros',
+                'annee_vehicule' => 2020,
+                'plaque_immatriculation' => 'CD-001-KIN',
+                'capacite_charge' => 15.5,
+                'mot_de_passe' => 'password123',
+                'statut' => 'actif',
+                'date_expiration_assurance' => '2025-12-31',
+            ],
+            [
+                'nom' => 'KABILA',
+                'prenom' => 'Marie',
+                'email' => 'marie.kabila@example.com',
+                'numero_telephone' => '+243987654321',
+                'adresse' => 'Boulevard du 30 Juin, Kinshasa',
+                'type_vehicule' => 'camionnette',
+                'marque_vehicule' => 'Toyota',
+                'modele_vehicule' => 'Hiace',
+                'annee_vehicule' => 2019,
+                'plaque_immatriculation' => 'CD-002-KIN',
+                'capacite_charge' => 3.5,
+                'mot_de_passe' => 'password123',
+                'statut' => 'actif',
+                'date_expiration_assurance' => '2025-10-15',
+            ],
+            [
+                'nom' => 'TSHISEKEDI',
+                'prenom' => 'Patrick',
+                'email' => 'patrick.tshisekedi@example.com',
+                'numero_telephone' => '+243555666777',
+                'adresse' => 'Avenue Tombalbaye, Kinshasa',
+                'type_vehicule' => 'fourgon',
+                'marque_vehicule' => 'Iveco',
+                'modele_vehicule' => 'Daily',
+                'annee_vehicule' => 2021,
+                'plaque_immatriculation' => 'CD-003-KIN',
+                'capacite_charge' => 7.2,
+                'mot_de_passe' => 'password123',
+                'statut' => 'actif',
+                'date_expiration_assurance' => '2026-03-20',
+            ]
+        ];
 
-        $auth = Auth::create([
-            'active' => 1,
-            'code' => 'AMJTGTNTWSDHOYM5TSNNA9GVOKUIQKESDEMP65LCFJT8UKJXJQ',
-            'created_at' => '2025-06-05 09:27:09.728313',
-            'password' => '$2a$10$HhCW16Nvflj8EpTqvpNDweKxu0Gwx1E3FJ/OVMEQwHJkHRJL1giHK',
-            'token' => null,
-            'username' => 'PDHCIH6FKWWX27ATJY37KDAGZYKM1OAIIQZZFUGJ5PICHCIBIH',
-            'merchant_id' => $merchant->id,
-        ]);
+        foreach ($owners as $ownerData) {
+            Owner::create($ownerData);
+        }
 
-        AuthToken::create([
-            'id' => hex2bin('0a50058cf23f1f34f9ed3f40ddae0000'),
-            'active' => 0,
-            'code' => 'MYQ9XZ05QN36SJB8DJ6MBJFSYSCAWT',
-            'created_at' => '2025-06-05 09:41:27.432795',
-            'expires_at' => '2025-06-05 10:41:27.423454',
-            'token' => 'eyJhbGciOiJIUzI1NiJ9...wTVSRV_drnqDFcSGpsvfJeEFcgYMsUBUgrrh938QaNQ',
-            'auth_id' => $auth->id,
-        ]);
+        // Créer des transporteurs
+        $transporters = [
+            [
+                'nom' => 'MBUYI',
+                'prenom' => 'Joseph',
+                'email' => 'joseph.mbuyi@example.com',
+                'numero_telephone' => '+243111222333',
+                'adresse' => 'Commune de Lemba, Kinshasa',
+                'numero_permis_conduire' => 'PC001234567',
+                'type_permis' => 'C',
+                'date_expiration_permis' => '2026-08-15',
+                'experience_conduite' => 8,
+                'mot_de_passe' => 'password123',
+                'statut' => 'disponible',
+                'owner_id' => 1,
+                'references' => 'Ancien chauffeur chez Transport Express (2018-2023)',
+            ],
+            [
+                'nom' => 'KASONGO',
+                'prenom' => 'Pierre',
+                'email' => 'pierre.kasongo@example.com',
+                'numero_telephone' => '+243444555666',
+                'adresse' => 'Commune de Matete, Kinshasa',
+                'numero_permis_conduire' => 'PC987654321',
+                'type_permis' => 'B',
+                'date_expiration_permis' => '2025-11-30',
+                'experience_conduite' => 5,
+                'mot_de_passe' => 'password123',
+                'statut' => 'disponible',
+                'owner_id' => 2,
+                'references' => 'Chauffeur indépendant depuis 2020',
+            ],
+            [
+                'nom' => 'NGOMA',
+                'prenom' => 'André',
+                'email' => 'andre.ngoma@example.com',
+                'numero_telephone' => '+243777888999',
+                'adresse' => 'Commune de Ngaliema, Kinshasa',
+                'numero_permis_conduire' => 'PC456789123',
+                'type_permis' => 'C',
+                'date_expiration_permis' => '2027-02-28',
+                'experience_conduite' => 12,
+                'mot_de_passe' => 'password123',
+                'statut' => 'actif',
+                'owner_id' => 3,
+                'references' => 'Ancien chauffeur militaire, reconverti dans le transport civil',
+            ]
+        ];
 
-        Configuration::create([
-            'active' => 1,
-            'code' => 'UA5FW3BSFMYT',
-            'created_at' => '2025-06-05 09:27:09.627432',
-            'schedule_date_format' => 'dd/MM/yyyy hh:mm:ss a',
-            'schedule_date_value' => '02/06/2025 05:00:00 AM',
-            'sms_from' => 'FLEXPAY',
-            'sms_login' => 'NCV4Y7JS',
-            'sms_url' => 'https://api.keccel.com/sms/v2/message.asp',
-            'sms_url_check' => 'https://api.keccel.com/sms/v2/delivery.asp',
-        ]);
+        foreach ($transporters as $transporterData) {
+            Transporter::create($transporterData);
+        }
 
-        User::create([
-            'code' => 'USR1234567890',
-            'created_at' => now(),
-            'email' => 'test@example.com',
-            'enabled' => 1,
-            'password' => bcrypt('password'),
-            'phone_number' => '243999999999',
-            'username' => 'testuser',
-        ]);
+        // Créer quelques messages de contact
+        $contacts = [
+            [
+                'name' => 'Lucie MBALA',
+                'email' => 'lucie.mbala@example.com',
+                'message' => 'Bonjour, je souhaiterais avoir plus d\'informations sur vos services de transport pour les entreprises. Pouvez-vous me contacter ?',
+                'created_at' => now()->subDays(2),
+            ],
+            [
+                'name' => 'Emmanuel KALONJI',
+                'email' => 'emmanuel.kalonji@example.com',
+                'message' => 'Je suis intéressé par votre plateforme pour transporter mes marchandises de Kinshasa vers Lubumbashi. Quels sont vos tarifs ?',
+                'created_at' => now()->subDays(1),
+            ],
+            [
+                'name' => 'Sylvie MWAMBA',
+                'email' => 'sylvie.mwamba@example.com',
+                'message' => 'Excellent service ! J\'ai utilisé votre plateforme la semaine dernière et tout s\'est très bien passé. Félicitations à toute l\'équipe.',
+                'created_at' => now()->subHours(6),
+            ]
+        ];
 
-        Message::create([
-            'id' => hex2bin('0a50058cf23f1f34f9ed3f40dea20001'),
-            'closed' => 0,
-            'content' => 'Hello FlexSMS at 1737560928180',
-            'created_at' => '2025-06-05 09:41:53.093166',
-            'delivered' => 0,
-            'nb_trial_check' => 2,
-            'notification' => null,
-            'phone_number' => '243815877848',
-            'reference' => '16620c03-e7f4-4b40-8c1e-e6ba98da253e',
-            'response' => 'SENT, 16620c03-e7f4-4b40-8c1e-e6ba98da253e, Message submitted to the mobile operator',
-            'sent' => 1,
-            'sms_from' => 'REGIDESO',
-            'sms_login' => 'NCV4Y7JS',
-            'auth_id' => $auth->id,
-            'merchant_id' => $merchant->id,
-        ]);
+        foreach ($contacts as $contactData) {
+            Contact::create($contactData);
+        }
     }
 }
