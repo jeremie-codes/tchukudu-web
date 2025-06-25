@@ -33,11 +33,10 @@
             <div class="container-fluid nav-header-container">
                 <div class="col-auto col-sm-6 col-lg-2 me-auto ps-lg-0">
                     <a class="navbar-brand flex flex-row jtext-center align-items-center" href="index.html">
-                        <img src="{{ asset('images/logo.png') }}" data-at2x="{{ asset('images/logo.png') }}" class="default-logo" style="width: 65px; max-height: 65px !important;" alt="T'chukudu Logo">
+                        <img src="{{ asset('images/logo.png') }}" data-at2x="{{ asset('images/logo.png') }}" class="defaultlogo" style="width: 65px; max-height: 65px !important;" alt="T'chukudu Logo">
+                        {{-- <img src="{{ asset('images/logo.png') }}" data-at2x="{{ asset('images/logo.png') }}" class="alt-logo mobile-log" style="width: 65px; max-height: 65px !important;" alt="T'chukudu Logo"> --}}
                         <b style="font-size: 18px" class="default-logo">T'chukudu </b>
-                        <img src="{{ asset('images/logo.png') }}" data-at2x="{{ asset('images/logo.png') }}" class="alt-logo" style="width: 65px; max-height: 65px !important;" alt="T'chukudu Logo">
                         <b style="font-size: 18px" class="alt-logo text-dark">T'chukudu</b>
-                        <img src="{{ asset('images/logo.png') }}" data-at2x="{{ asset('images/logo.png') }}" class="mobile-logo" style="width: 65px; max-height: 65px !important;" alt="T'chukudu Logo">
                     </a>
                 </div>
                 <div class="col-auto menu-order px-lg-0">
